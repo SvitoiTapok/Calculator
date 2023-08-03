@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.desktop.UserSessionEvent;
 import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -38,7 +39,10 @@ class Worker implements Call{
                 System.out.println(b.getMessage());
             }
         }else {
-            File fil = new File("input.txt");
+            Scanner sc = new Scanner(System.in);
+            JOptionPane.showMessageDialog(null, "Пожалуйста, введите путь к файлу в консоль");
+            String path = sc.nextLine();
+            File fil = new File(path);
             try {
                 Scanner input = new Scanner(fil);
                 String a[] = input.nextLine().split(" ");
@@ -59,7 +63,8 @@ class Worker implements Call{
                 }
             } catch (FileNotFoundException err) {
                 JOptionPane.showMessageDialog(null, "файл не найден");
-                Callback(JOptionPane.NO_OPTION);
+                User a = new User(new Worker());
+                a.DoCalculate();
             }
         }
     }
